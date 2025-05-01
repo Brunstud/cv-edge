@@ -76,9 +76,11 @@ python edge_detection.py
 
 #### ✅ 示例结果
 - **任务类型：边缘检测效果对比（Sobel/Prewitt/Laplacian/Canny）**  
-| 原图 | 边缘检测结果 |
+  - 原图：![8068](./dataset/BSDS500/images/test/8068.jpg)
+  - 边缘检测结果：![edge_8068](./demo/edges/edge_8068.png)
+<!-- | 原图 | 边缘检测结果 |
 |------|----------------|
-|![8068](./dataset/BSDS500/images/test/8068.jpg)|![edge_8068](./results/edges/edge_8068.png)|
+|![8068](./dataset/BSDS500/images/test/8068.jpg)|![edge_8068](./demo/edges/edge_8068.png)| -->
 
 ### 2️⃣ 阶段二：图像金字塔构建与图像重建
 
@@ -93,11 +95,15 @@ python pyramid.py
 
 #### ✅ 示例结果
 - **任务类型：Laplacian 金字塔图像重建效果（3 层 / 4 层 / 5 层）**  
-| 原图 | 三层金字塔重建 |
+  - 原图：![kodim06](./dataset/Kodak/kodim06.png)
+  - 三层金字塔重建：![L3](./results/kodak_pyramid/kodim06_recon_L3.png)
+  - 四层金字塔重建：![L4](./results/kodak_pyramid/kodim06_recon_L4.png)
+  - 五层金字塔重建：![L5](./results/kodak_pyramid/kodim06_recon_L5.png)
+<!-- | 原图 | 三层金字塔重建 |
 |------|----------------|
 | ![](./dataset/Kodak/kodim06.png) | ![](./results/kodak_pyramid/kodim06_recon_L3.png) |
 | 四层金字塔重建 | 五层金字塔重建 |
-| ![](./results/kodak_pyramid/kodim06_recon_L4.png) | ![](./results/kodak_pyramid/kodim06_recon_L5.png) |
+| ![](./demo/kodak_pyramid/kodim06_recon_L4.png) | ![](./demo/kodak_pyramid/kodim06_recon_L5.png) | -->
 
 
 ### 3️⃣ 阶段三：边缘引导的分割任务
@@ -114,20 +120,32 @@ python segmentation.py
 
 #### ✅ 示例结果
 - **任务类型：马图结构分割（基于 Canny）**  
-| 原图 | Canny | Prewitt |
+  - 原图：![horse](./dataset/horses/images/image-296.png)
+  - 标注：![mask_horse](./dataset/horses/masks/mask-296.png)
+  - Canny：![canny_horse](./results/segmentation/canny_296.png)
+  - Laplacian：![laplacian_horse](./results/segmentation/laplacian_296.png)
+  - Prewitt：![prewitt_horse](./results/segmentation/prewitt_296.png)
+  - Sobel：![sobel_horse](./results/segmentation/sobel_296.png)
+<!-- | 原图 | Canny | Prewitt |
 |------|-------|---------|
-| ![](./dataset/horses/images/image-296.png) | ![](./results/segmentation/canny_296.png) | ![](./results/segmentation/prewitt_296.png) |
+| ![](./dataset/horses/images/image-296.png) | ![](./demo/segmentation/canny_296.png) | ![](./demo/segmentation/prewitt_296.png) |
 | 标注 | Laplacian | Sobel |
-| ![](./dataset/horses/masks/mask-296.png) | ![](./results/segmentation/laplacian_296.png) | ![](./results/segmentation/sobel_296.png) |
+| ![](./dataset/horses/masks/mask-296.png) | ![](./demo/segmentation/laplacian_296.png) | ![](./demo/segmentation/sobel_296.png) | -->
 
 
 
 - **任务类型：猫图结构分割（基于 Canny）**  
-| 原图 | Canny | Prewitt |
+  - 原图：![cat](./dataset/hw2data/imgs/black_kitten_star.jpg)
+  - 标注：![mask_cat](./dataset/hw2data/gt/black_kitten_star.png)
+  - Canny：![canny_horse](./results/segmentation/canny_black_kitten_star.png)
+  - Laplacian：![laplacian_horse](./results/segmentation/laplacian_black_kitten_star.png)
+  - Prewitt：![prewitt_horse](./results/segmentation/prewitt_black_kitten_star.png)
+  - Sobel：![sobel_horse](./results/segmentation/sobel_black_kitten_star.png)
+<!-- | 原图 | Canny | Prewitt |
 |------|-------|---------|
-| ![](./dataset/hw2data/imgs/black_kitten_star.jpg) | ![](./results/segmentation/canny_black_kitten_star.png) | ![](./results/segmentation/prewitt_black_kitten_star.png) |
+| ![](./dataset/hw2data/imgs/black_kitten_star.jpg) | ![](./demo/segmentation/canny_black_kitten_star.png) | ![](./demo/segmentation/prewitt_black_kitten_star.png) |
 | 标注 | Laplacian | Sobel |
-| ![](./dataset/hw2data/gt/black_kitten_star.png) | ![](./results/segmentation/laplacian_black_kitten_star.png) | ![](./results/segmentation/sobel_black_kitten_star.png) |
+| ![](./dataset/hw2data/gt/black_kitten_star.png) | ![](./demo/segmentation/laplacian_black_kitten_star.png) | ![](./demo/segmentation/sobel_black_kitten_star.png) | -->
 
 
 ---
