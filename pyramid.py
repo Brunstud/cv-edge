@@ -58,7 +58,10 @@ def process_kodak_dataset():
     os.makedirs(out_dir, exist_ok=True)
     image_files = [f for f in os.listdir(data_dir) if f.endswith(".png")]
 
-    result_log_path = os.path.join(out_dir, "../metrics/pyramid_metrics.txt")  # 指标输出文件
+    result_log_path = os.path.join(out_dir, "../metrics/pyramid_metrics.txt")
+    summary_path = os.path.join(out_dir, "../metrics/pyramid_summary.txt")
+    all_metrics = {3: [], 4: [], 5: []}  # 按层数存储三项指标
+
     with open(result_log_path, "w") as f_log:
         f_log.write("Filename\tLevels\tPSNR(dB)\tSSIM\tMSE\n")
 
@@ -76,6 +79,7 @@ def process_kodak_dataset():
                 score_psnr = psnr(img, recon)
                 score_ssim = compute_ssim(img, recon)
                 score_mse = compute_mse(img, recon)
+                all_metrics[levels].append((score_psnr, score_ssim, score_mse))
 
                 print(f"  Levels: {levels}, PSNR: {score_psnr:.2f} dB, SSIM: {score_ssim:.4f}, MSE: {score_mse:.2f}")
                 f_log.write(f"{fname}\t{levels}\t{score_psnr:.2f}\t{score_ssim:.4f}\t{score_mse:.2f}\n")
@@ -83,6 +87,19 @@ def process_kodak_dataset():
                 # 保存重建图像
                 recon_path = os.path.join(out_dir, f"{fname[:-4]}_recon_L{levels}.png")
                 cv2.imwrite(recon_path, recon)
+    
+    # 输出每层平均指标
+    with open(summary_path, "w") as f_sum:
+        f_sum.write("Levels\tAvg_PSNR\tAvg_SSIM\tAvg_MSE\n")
+        for level in [3, 4, 5]:
+            psnrs = [x[0] for x in all_metrics[level]]
+            ssims = [x[1] for x in all_metrics[level]]
+            mses = [x[2] for x in all_metrics[level]]
+            avg_psnr = np.mean(psnrs)
+            avg_ssim = np.mean(ssims)
+            avg_mse = np.mean(mses)
+            f_sum.write(f"{level}\t{avg_psnr:.2f}\t{avg_ssim:.4f}\t{avg_mse:.2f}\n")
+        print(f"\n✅ 层级平均指标写入：{summary_path}")
 
 if __name__ == "__main__":
     process_kodak_dataset()

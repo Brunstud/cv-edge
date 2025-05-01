@@ -1,0 +1,13 @@
+# Dataset: horses
+Method	Avg_IoU	Avg_F1	Avg_Accuracy
+canny	0.3026	0.3919	0.7003
+sobel	0.3026	0.3919	0.7003
+prewitt	0.3026	0.3919	0.7003
+laplacian	0.3026	0.3919	0.7003
+
+# Dataset: hw2data
+Method	Avg_IoU	Avg_F1	Avg_Accuracy
+canny	0.2157	0.2702	0.5912
+sobel	0.2157	0.2702	0.5912
+prewitt	0.2157	0.2702	0.5912
+laplacian	0.2157	0.2702	0.5912

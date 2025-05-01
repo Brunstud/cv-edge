@@ -94,17 +94,44 @@ def process_dataset(image_dir, mask_dir, prefix_img, prefix_mask, ext_img, ext_m
                 pred_mask = (markers > 1).astype(np.uint8) * 255
                 metrics = evaluate_all_metrics(pred_mask, gt_mask)
 
+                summary_stats[method]["IoU"].append(metrics["IoU"])
+                summary_stats[method]["F1"].append(metrics["F1"])
+                summary_stats[method]["Accuracy"].append(metrics["Accuracy"])
+
                 print(f"{fname} | {method}: IoU = {metrics['IoU']:.4f}, F1 = {metrics['F1']:.4f}, Acc = {metrics['Accuracy']:.4f}")
                 f_log.write(f"{fname}\t{method}\t{metrics['IoU']:.4f}\t{metrics['F1']:.4f}\t{metrics['Accuracy']:.4f}\n")
 
                 out_path = f"results/segmentation/{method}_{idx}.png"
                 cv2.imwrite(out_path, pred_mask)
 
-def run_all():
-    log_path = "results/pyramid/seg_metrics.txt"
-    if os.path.exists(log_path):
-        os.remove(log_path)
 
+methods = ["canny", "sobel", "prewitt", "laplacian"]
+summary_stats = {}
+def init_summary():
+    global summary_stats
+    summary_stats = {m: {"IoU": [], "F1": [], "Accuracy": []} for m in methods}
+
+def summarize_all(dataset_name, output="results/metrics/seg_summary.txt"):
+    with open(output, 'a') as f:
+        f.write(f"\n# Dataset: {dataset_name}\n")
+        f.write("Method\tAvg_IoU\tAvg_F1\tAvg_Accuracy\n")
+        for method in methods:
+            iou_mean = np.mean(summary_stats[method]["IoU"])
+            f1_mean = np.mean(summary_stats[method]["F1"])
+            acc_mean = np.mean(summary_stats[method]["Accuracy"])
+            f.write(f"{method}\t{iou_mean:.4f}\t{f1_mean:.4f}\t{acc_mean:.4f}\n")
+    print(f"✅ 数据集 {dataset_name} 平均结果写入：{output}")
+    init_summary()  # 清空统计缓存
+
+
+def run_all():
+    log_path = "results/metrics/seg_metrics.txt"
+    summary_path = "results/metrics/seg_summary.txt"
+    for f in [log_path, summary_path]:
+        if os.path.exists(f):
+            os.remove(f)
+
+    init_summary()
     process_dataset(
         image_dir="./dataset/horses/images",
         mask_dir="./dataset/horses/masks",
@@ -114,7 +141,9 @@ def run_all():
         ext_mask=".png",
         log_file=log_path
     )
+    summarize_all("horses", summary_path)
 
+    init_summary()
     process_dataset(
         image_dir="./dataset/hw2data/imgs",
         mask_dir="./dataset/hw2data/gt",
@@ -124,6 +153,8 @@ def run_all():
         ext_mask=".png",
         log_file=log_path
     )
+    summarize_all("hw2data", summary_path)
+
 
 if __name__ == "__main__":
     run_all()
