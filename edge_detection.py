@@ -100,8 +100,8 @@ def process_bsds500_dataset():
     # 遍历 BSDS500 数据集下的 train/val/test 子集，评估各方法边缘性能
     base_path = "./dataset/BSDS500"
     splits = ["train", "val", "test"]
-    log_path = "results/edge_eval_metrics.txt"  # 保存每张图像评估结果
-    summary_path = "results/edge_eval_summary.txt"  # 保存平均指标汇总
+    log_path = "results/metrics/edge_eval_metrics.txt"  # 保存每张图像评估结果
+    summary_path = "results/metrics/edge_eval_summary.txt"  # 保存平均指标汇总
 
     # 用于累加各方法的所有指标值
     all_metrics = {

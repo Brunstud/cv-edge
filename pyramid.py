@@ -58,7 +58,7 @@ def process_kodak_dataset():
     os.makedirs(out_dir, exist_ok=True)
     image_files = [f for f in os.listdir(data_dir) if f.endswith(".png")]
 
-    result_log_path = os.path.join(out_dir, "metrics_results.txt")  # 指标输出文件
+    result_log_path = os.path.join(out_dir, "../metrics/pyramid_metrics.txt")  # 指标输出文件
     with open(result_log_path, "w") as f_log:
         f_log.write("Filename\tLevels\tPSNR(dB)\tSSIM\tMSE\n")
 

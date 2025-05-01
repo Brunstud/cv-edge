@@ -101,7 +101,7 @@ def process_dataset(image_dir, mask_dir, prefix_img, prefix_mask, ext_img, ext_m
                 cv2.imwrite(out_path, pred_mask)
 
 def run_all():
-    log_path = "results/segmentation/eval_metrics.txt"
+    log_path = "results/pyramid/seg_metrics.txt"
     if os.path.exists(log_path):
         os.remove(log_path)
 
