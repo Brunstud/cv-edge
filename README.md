@@ -77,7 +77,7 @@ python edge_detection.py
 #### ✅ 示例结果
 - **任务类型：边缘检测效果对比（Sobel/Prewitt/Laplacian/Canny）**  
   - 原图：![8068](./dataset/BSDS500/images/test/8068.jpg)
-  - 边缘检测结果：![edge_8068](./demo/edges/edge_8068.png)
+  - 边缘检测结果：![edge_8068](./results/edges/edge_8068.png)
 <!-- | 原图 | 边缘检测结果 |
 |------|----------------|
 |![8068](./dataset/BSDS500/images/test/8068.jpg)|![edge_8068](./demo/edges/edge_8068.png)| -->
